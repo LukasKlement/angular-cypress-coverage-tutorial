@@ -76,6 +76,13 @@
             }
           }
         },
+        "serve-coverage": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+          "browserTarget": "angular-cypress-coverage-tutorial:build",
+          "extraWebpackConfig": "./cypress/coverage.webpack.js"
+        }
+      },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
@@ -105,7 +112,7 @@
             "tsConfig": [
               "tsconfig.app.json",
               "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "cypress/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -113,10 +120,49 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "angular-cypress-coverage-tutorial:serve-coverage",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-cypress-coverage-tutorial:serve-coverage:production"
+            }
+          }
+        },
+        "e2e-ci": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "browser": "chrome",
+            "devServerTarget": "angular-cypress-coverage-tutorial:serve-coverage",
+            "headless": true,
+            "watch": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-cypress-coverage-tutorial:serve-coverage:production"
+            }
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
             "devServerTarget": "angular-cypress-coverage-tutorial:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-cypress-coverage-tutorial:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "angular-cypress-coverage-tutorial:serve",
+            "watch": true,
+            "headless": false
           },
           "configurations": {
             "production": {
