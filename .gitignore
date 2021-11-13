@@ -44,3 +44,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Cypress
+cypress/fixtures/lang/*.json
+cypress/screenshots/
+cypress/results
+cypress/reports
+cypress/videos
+.nyc_output
