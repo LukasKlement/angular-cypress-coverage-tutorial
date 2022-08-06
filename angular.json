@@ -167,5 +167,7 @@
       }
     }
   },
-  "defaultProject": "angular-cypress-coverage-tutorial"
+  "cli": {
+    "analytics": false
+  }
 }

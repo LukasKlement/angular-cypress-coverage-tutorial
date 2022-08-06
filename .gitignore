@@ -52,3 +52,4 @@ cypress/results
 cypress/reports
 cypress/videos
 .nyc_output
+.angular
